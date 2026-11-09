@@ -1,6 +1,7 @@
 package org.example
 
 fun main() {
+
     // Задание 1
     for (number in 1..5) {
         println(number)
