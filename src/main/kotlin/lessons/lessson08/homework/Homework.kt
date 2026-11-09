@@ -1,7 +1,5 @@
 package org.example.lessons.lessson08.homework
 
-import java.nio.file.Path
-
 fun main() {
 
     //Задание 1
