@@ -1,105 +1,93 @@
 package org.example.lessons.lessson08.homework
 
+import java.nio.file.Path
+
 fun main() {
-// Задание 1
+
+    //Задание 1
+
     transformPhrase("Это невозможно выполнить за один день")
     transformPhrase("Я не уверен в успехе этого проекта")
     transformPhrase("Произошла катастрофа на сервере")
     transformPhrase("Этот код работает без проблем")
     transformPhrase("Удача")
 
-// Задание 2
+    //Задание 2
     extractDateAndTime("Пользователь вошел в систему -> 2021-12-01 09:48:23")
 
-// Задание 3
+    //Задание 3
     maskCardNumber("4539 1488 0343 6467")
 
-// Задание 4
-    formatEmail("username@example.com")
+    //Задание 4
+    replaceEmail("username@example.com")
 
-// Задание 5
+    //Задание 5
     extractFileName("C:/Пользователи/Документы/report.txt")
-    extractFileName("D:/good.themes/dracula.theme")
 
-// Задание 6
-    createAbbreviation("Котлин лучший язык программирования")}
+    //Задание 6
+    createAbbreviation("Объектно ориентированное программирование")
+}
 
-// Задание 1: Преобразование строк
 fun transformPhrase(phrase: String) {
-var result = phrase
 
-if (result.contains("невозможно")) {
-    result = result.replace(
-        "невозможно",
-        "совершенно точно возможно, просто требует времени"
-    )
-}
+    val result = when {
+        phrase.contains("невозможно") -> phrase.replace(
+            "невозможно",
+            "совершенно точно возможно, просто требует времени"
+        )
 
-if (result.startsWith("Я не уверен")) {
-    result = "$result, но моя интуиция говорит об обратном"
-}
-
-if (result.contains("катастрофа")) {
-    result = result.replace("катастрофа", "интересное событие")
-}
-
-if (result.endsWith("без проблем")) {
-    result = result.replace(
-        "без проблем",
-        "с парой интересных вызовов на пути"
-    )
-}
-
-if (!result.contains(" ") && result.isNotEmpty()) {
-    result = "Иногда, $result, но не всегда"
-}
-
-println(result)}
-
-
-// Задание 2: Извлечение даты из строки лога
-fun extractDateAndTime(log: String) {
-val arrowIndex = log.indexOf("->")
-val dateAndTime = log.substring(arrowIndex + 2).trim()
-val parts = dateAndTime.split(" ")
-
-val date = parts[0]
-val time = parts[1]
-
-println(date)
-println(time)}
-
-// Задание 3: Маскирование личных данных
-fun maskCardNumber(cardNumber: String) {
-val lastFourDigits = cardNumber.takeLast(4)
-val maskedNumber = "*".repeat(cardNumber.length - 4) + lastFourDigits
-
-println(maskedNumber)}
-
-// Задание 4: Форматирование адреса электронной почты
-fun formatEmail(email: String) {
-val formattedEmail = email
-    .replace("@", " [at] ")
-    .replace(".", " [dot] ")
-
-println(formattedEmail)}
-
-// Задание 5: Извлечение имени файла из пути
-fun extractFileName(path: String) {
-val fileName = path.substringAfterLast("/")
-
-println(fileName)}
-
-// Задание 6: Создание аббревиатуры из фразы
-fun createAbbreviation(phrase: String) {
-val words = phrase.split(" ")
-var abbreviation = ""
-
-for (word in words) {
-    if (word.isNotEmpty()) {
-        abbreviation += word[0]
+        phrase.startsWith("Я не уверен", true) -> "$phrase, но моя интуиция говорит об обратном"
+        phrase.contains("катастрофа") -> phrase.replace("катастрофа", "интересное событие")
+        phrase.endsWith("без проблем") -> phrase.replace("без проблем", "с парой интересных вызовов на пути")
+        phrase.isNotEmpty() -> "Иногда, $phrase , но не всегда"
+        else -> phrase
     }
+    println(result)
+    println()
 }
 
-println(abbreviation)
+fun extractDateAndTime(log: String) {
+    val arrowIndes = log.indexOf("->")
+    val dateAndTime = log.substring(arrowIndes + 2).trim()
+    val parts = dateAndTime.split(" ")
+
+    val date = parts[0]
+    val time = parts[1]
+
+    println(date)
+    println(time)
+}
+
+fun maskCardNumber(cardNumber: String) {
+
+    val lastFourNumbers = cardNumber.substring(cardNumber.length - 4)
+    val maskNumbers = "*".repeat(4)
+
+    println("$maskNumbers $maskNumbers $maskNumbers $lastFourNumbers")
+}
+
+fun replaceEmail(email: String) {
+    val formatEmail = email
+        .replace("@", " [at] ")
+        .replace(".", " [dot] ")
+    println(formatEmail)
+}
+
+fun extractFileName(path: String) {
+    val lastSlashIndex = path.lastIndexOf('/')
+    val fileName = path.substring(lastSlashIndex + 1)
+
+    println(fileName)
+}
+
+fun createAbbreviation(phrase: String) {
+    val words = phrase.split(" ")
+    var abbreviation = ""
+
+    for (word in words) {
+        if (word.isNotEmpty()) {
+            abbreviation += word[0]
+        }
+    }
+    println(abbreviation.uppercase())
 }
