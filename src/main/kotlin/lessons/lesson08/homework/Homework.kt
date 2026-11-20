@@ -1,4 +1,4 @@
-package org.example.lessons.lessson08.homework
+package org.example.lessons.lesson08.homework
 
 fun main() {
 
