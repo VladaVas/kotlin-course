@@ -1,5 +1,6 @@
 package lessons.lesson21.homeworks
 
+// Задача 1
 fun analyzeDataType(value: Any) {
     val message = when (value) {
         is String -> "Это строка: $value"
@@ -11,10 +12,13 @@ fun analyzeDataType(value: Any) {
     println(message)
 }
 
+// Задача 2
 fun safeCastToList(value: Any): Int = (value as? List<*>)?.size ?: -1
 
+// Задача 3
 fun getStringLengthOrZero(value: Any?): Int = (value as? String)?.length ?: 0
 
+// Задача 4
 fun Any.toSquare(): Double {
     val number = when (this) {
         is Number -> toDouble()
@@ -24,6 +28,7 @@ fun Any.toSquare(): Double {
     return number * number
 }
 
+// Задача 5
 fun sumIntOrDoubleValues(values: List<Any>): Double = values.sumOf { value ->
     when (value) {
         is Int -> value.toDouble()
@@ -32,6 +37,7 @@ fun sumIntOrDoubleValues(values: List<Any>): Double = values.sumOf { value ->
     }
 }
 
+// Задача 6
 fun tryCastToListAndPrint(value: Any) {
     val list = value as? List<*>
     if (list == null) {
